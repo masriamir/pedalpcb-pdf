@@ -13,7 +13,7 @@ See below for usage examples. Either a single file or a list or files can be pro
 $ java -jar pedalpcb-pdf.jar document.pdf
 
 # Multi-file
-$ java -jar pedalpcb-pdf.jar document1.pdf document2 ...
+$ java -jar pedalpcb-pdf.jar document1.pdf document2.pdf ...
 
 # Entire directory
 $ find /path/to/dir -name *.pdf | xargs -exec java -jar pedalpcb-pdf.jar
