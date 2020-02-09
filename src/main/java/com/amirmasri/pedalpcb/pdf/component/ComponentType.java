@@ -10,7 +10,8 @@ public enum ComponentType {
   DIODE("D", "Diodes"),
   INTEGRATED_CIRCUIT("IC", "Integrated Circuits"),
   POTENTIOMETER("P", "Potentiometers"),
-  SWITCH("SW", "Switches");
+  SWITCH("SW", "Switches"),
+  TRIM_POT("TRIM", "Trim Pots");
 
   private final String prefix;
   private final String label;

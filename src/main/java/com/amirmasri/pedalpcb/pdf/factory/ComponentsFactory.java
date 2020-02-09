@@ -7,6 +7,7 @@ import com.amirmasri.pedalpcb.pdf.extractor.PotentiometerExtractor;
 import com.amirmasri.pedalpcb.pdf.extractor.ResistorExtractor;
 import com.amirmasri.pedalpcb.pdf.extractor.SwitchExtractor;
 import com.amirmasri.pedalpcb.pdf.extractor.TransistorExtractor;
+import com.amirmasri.pedalpcb.pdf.extractor.TrimPotExtractor;
 import com.amirmasri.pedalpcb.pdf.model.Components;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ public final class ComponentsFactory {
   private static final IntegratedCircuitExtractor EXTRACTOR_INTEGRATED_CIRCUIT = new IntegratedCircuitExtractor();
   private static final PotentiometerExtractor EXTRACTOR_POTENTIOMETER = new PotentiometerExtractor();
   private static final SwitchExtractor EXTRACTOR_SWITCH = new SwitchExtractor();
+  private static final TrimPotExtractor EXTRACTOR_TRIM_POT = new TrimPotExtractor();
 
   public Components create(String text) {
     Components components = new Components();
@@ -45,6 +47,9 @@ public final class ComponentsFactory {
 
     components.addSwitches(EXTRACTOR_SWITCH.extract(text));
     LOGGER.debug("switches = {}", components.getSwitches());
+
+    components.addTrimPots(EXTRACTOR_TRIM_POT.extract(text));
+    LOGGER.debug("trim pots = {}", components.getTrimPots());
 
     return components;
   }

@@ -9,6 +9,7 @@ import com.amirmasri.pedalpcb.pdf.component.Potentiometer;
 import com.amirmasri.pedalpcb.pdf.component.Resistor;
 import com.amirmasri.pedalpcb.pdf.component.Switch;
 import com.amirmasri.pedalpcb.pdf.component.Transistor;
+import com.amirmasri.pedalpcb.pdf.component.TrimPot;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,10 @@ public final class Components {
     addComponent(ComponentType.SWITCH, switches);
   }
 
+  public void addTrimPots(List<TrimPot> trimPots) {
+    addComponent(ComponentType.TRIM_POT, trimPots);
+  }
+
   public List<Resistor> getResistors() {
     return (List<Resistor>) componentTypeMap.get(ComponentType.RESISTOR);
   }
@@ -87,6 +92,10 @@ public final class Components {
 
   public List<Switch> getSwitches() {
     return (List<Switch>) componentTypeMap.get(ComponentType.SWITCH);
+  }
+
+  public List<TrimPot> getTrimPots() {
+    return (List<TrimPot>) componentTypeMap.get(ComponentType.TRIM_POT);
   }
 
   @Override
