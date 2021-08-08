@@ -4,6 +4,9 @@ import com.akmcircuits.pedalpcb.pdf.exception.PedalPcbPdfException;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Paths;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -18,7 +21,7 @@ public final class DocumentUtils {
 
   public static PDDocument loadDocument(String filePath) throws PedalPcbPdfException {
     try {
-      PDDocument document = PDDocument.load(new File(filePath));
+      PDDocument document = PDDocument.load(Paths.get(filePath).toFile());
       AccessPermission permission = document.getCurrentAccessPermission();
 
       if (!permission.canExtractContent()) {
