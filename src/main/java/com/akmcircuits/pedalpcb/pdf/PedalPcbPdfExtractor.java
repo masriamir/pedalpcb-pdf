@@ -18,7 +18,14 @@ import org.slf4j.LoggerFactory;
 public final class PedalPcbPdfExtractor {
   private static final Logger LOGGER = LoggerFactory.getLogger(PedalPcbPdfExtractor.class);
 
+  /**
+   * Regex string to extract pedal name.
+   */
   private static final String REGEX_NAME_BASE = "(Revision.*)\\s(.*)";
+
+  /**
+   * Regex string to extract build document revision.
+   */
   private static final String REGEX_REVISION_BASE = "Revision\\s+.*";
 
   private static final StringExtractor EXTRACTOR_NAME = new StringExtractor(REGEX_NAME_BASE,
