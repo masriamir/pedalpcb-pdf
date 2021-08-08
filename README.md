@@ -2,7 +2,7 @@
 
 ## What is it?
 
-A command-line Java library to generate bill of materials information from PedalPCB build documentation PDF files.
+A command-line Java library to generate a bill of materials from PedalPCB build documentation PDF files.
 
 ## Usage
 
@@ -63,6 +63,6 @@ Potentiometers
 [INTENSITY] = B5K X 1
 ```
 
-## Utilizes
+## Dependencies
 
 * [Apache PDFBox](https://pdfbox.apache.org/ "Apache PDFBox")
