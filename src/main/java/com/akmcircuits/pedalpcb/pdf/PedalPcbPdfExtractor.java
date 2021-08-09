@@ -9,6 +9,8 @@ import com.akmcircuits.pedalpcb.pdf.util.DocumentUtils;
 import com.akmcircuits.pedalpcb.pdf.extractor.StringExtractor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -37,15 +39,20 @@ public final class PedalPcbPdfExtractor {
 
   public PedalPcbPdf extractPcb(String filePath) throws PedalPcbPdfException {
     PDDocument document = DocumentUtils.loadDocument(filePath);
-
     String documentText = DocumentUtils.extractDocumentText(document);
-    LOGGER.debug("got document text {}", documentText);
 
     DocumentUtils.closeDocument(document);
 
-    String name = EXTRACTOR_NAME.extract(documentText).get(2);
-    String revision = EXTRACTOR_REVISION.extract(documentText).get(0);
-    LOGGER.debug("found {}, Revision {}", name, revision);
+    List<String> names = EXTRACTOR_NAME.extract(documentText);
+    List<String> revisions = EXTRACTOR_REVISION.extract(documentText);
+
+    if (names.isEmpty() || revisions.isEmpty()) {
+      throw new PedalPcbPdfException("unable to identify pedal");
+    }
+
+    String name = names.get(2);
+    String revision = revisions.get(0).split(" ")[1];
+    LOGGER.info("found {}, Revision {}", name, revision);
 
     Components components = COMPONENTS_FACTORY.create(documentText);
 
@@ -56,7 +63,11 @@ public final class PedalPcbPdfExtractor {
     List<PedalPcbPdf> pcbPdfs = new ArrayList<>(filePaths.size());
 
     for (String filePath : filePaths) {
-      pcbPdfs.add(extractPcb(filePath));
+      try {
+        pcbPdfs.add(extractPcb(filePath));
+      } catch (Exception e) {
+        LOGGER.warn("error parsing document: {}", e.getMessage());
+      }
     }
 
     return new MultiPedalPcbPdf(pcbPdfs);

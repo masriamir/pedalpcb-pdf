@@ -41,7 +41,7 @@ abstract class AbstractComponentExtractor<T extends Component> extends
       components.add(componentFactory.create(name, value));
     }
 
-    LOGGER.debug("found {}", components.size());
+    LOGGER.debug("found {} components", components.size());
     return components;
   }
 

@@ -20,6 +20,8 @@ public final class DocumentUtils {
   }
 
   public static PDDocument loadDocument(String filePath) throws PedalPcbPdfException {
+    LOGGER.info("loading document {}", filePath);
+
     try {
       PDDocument document = PDDocument.load(Paths.get(filePath).toFile());
       AccessPermission permission = document.getCurrentAccessPermission();
