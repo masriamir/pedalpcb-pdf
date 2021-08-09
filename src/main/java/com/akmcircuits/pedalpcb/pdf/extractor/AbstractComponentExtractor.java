@@ -1,55 +1,56 @@
 package com.akmcircuits.pedalpcb.pdf.extractor;
 
-import com.akmcircuits.pedalpcb.pdf.factory.ComponentFactory;
 import com.akmcircuits.pedalpcb.pdf.component.Component;
 import com.akmcircuits.pedalpcb.pdf.component.ComponentType;
+import com.akmcircuits.pedalpcb.pdf.factory.ComponentFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 abstract class AbstractComponentExtractor<T extends Component> extends
-    AbstractExtractor<T> implements ComponentExtractor<T> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractComponentExtractor.class);
+        AbstractExtractor<T> implements ComponentExtractor<T> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractComponentExtractor.class);
 
-  private static final String REGEX_COMPONENT_BASE = "^(%s\\d+)\\s+(\\w+)";
+    private static final String REGEX_COMPONENT_BASE = "^(%s\\d+)\\s+(\\w+)";
 
-  private final ComponentFactory<T> componentFactory;
+    private final ComponentFactory<T> componentFactory;
 
-  protected AbstractComponentExtractor(String regexBase, ComponentType type,
-      ComponentFactory<T> componentFactory) {
-    super(String.format(regexBase, type.getPrefix()), Pattern.MULTILINE);
-    this.componentFactory = componentFactory;
-  }
-
-  protected AbstractComponentExtractor(ComponentType type, ComponentFactory<T> componentFactory) {
-    this(REGEX_COMPONENT_BASE, type, componentFactory);
-  }
-
-  @Override
-  public List<T> extract(String text) {
-    List<T> components = new ArrayList<>();
-    Matcher matcher = getRegex().matcher(text);
-
-    while (matcher.find()) {
-      String name = matcher.group(1);
-      String value = sanitizeUnits(matcher.group(2));
-
-      LOGGER.debug("found match {}={}", name, value);
-      components.add(componentFactory.create(name, value));
+    protected AbstractComponentExtractor(String regexBase, ComponentType type,
+                                         ComponentFactory<T> componentFactory) {
+        super(String.format(regexBase, type.getPrefix()), Pattern.MULTILINE);
+        this.componentFactory = componentFactory;
     }
 
-    LOGGER.debug("found {} components", components.size());
-    return components;
-  }
+    protected AbstractComponentExtractor(ComponentType type, ComponentFactory<T> componentFactory) {
+        this(REGEX_COMPONENT_BASE, type, componentFactory);
+    }
 
-  private String sanitizeUnits(String value) {
-    return value
-        .replace("nF", "n")
-        .replace("uF", "u")
-        .replace("pF", "p")
-        .replace("R", "");
-  }
+    @Override
+    public List<T> extract(String text) {
+        List<T> components = new ArrayList<>();
+        Matcher matcher = getRegex().matcher(text);
+
+        while (matcher.find()) {
+            String name = matcher.group(1);
+            String value = sanitizeUnits(matcher.group(2));
+
+            LOGGER.debug("found match {}={}", name, value);
+            components.add(componentFactory.create(name, value));
+        }
+
+        LOGGER.debug("found {} components", components.size());
+        return components;
+    }
+
+    private String sanitizeUnits(String value) {
+        return value
+                .replace("nF", "n")
+                .replace("uF", "u")
+                .replace("pF", "p")
+                .replace("R", "");
+    }
 }

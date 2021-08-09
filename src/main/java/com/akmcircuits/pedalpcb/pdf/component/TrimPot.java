@@ -1,14 +1,14 @@
 package com.akmcircuits.pedalpcb.pdf.component;
 
 public final class TrimPot extends AbstractComponent {
-  public static final ComponentType TYPE = ComponentType.TRIM_POT;
+    public static final ComponentType TYPE = ComponentType.TRIM_POT;
 
-  public TrimPot(String name, String value) {
-    super(name, value);
-  }
+    public TrimPot(String name, String value) {
+        super(name, value);
+    }
 
-  @Override
-  public ComponentType getType() {
-    return TYPE;
-  }
+    @Override
+    public ComponentType getType() {
+        return TYPE;
+    }
 }

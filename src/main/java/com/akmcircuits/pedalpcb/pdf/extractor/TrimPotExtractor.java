@@ -5,7 +5,7 @@ import com.akmcircuits.pedalpcb.pdf.component.TrimPot;
 import com.akmcircuits.pedalpcb.pdf.factory.TrimPotFactory;
 
 public final class TrimPotExtractor extends AbstractComponentExtractor<TrimPot> {
-  public TrimPotExtractor() {
-    super(ComponentType.TRIM_POT, new TrimPotFactory());
-  }
+    public TrimPotExtractor() {
+        super(ComponentType.TRIM_POT, new TrimPotFactory());
+    }
 }

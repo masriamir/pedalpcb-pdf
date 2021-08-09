@@ -5,7 +5,7 @@ import com.akmcircuits.pedalpcb.pdf.component.Potentiometer;
 import com.akmcircuits.pedalpcb.pdf.factory.PotentiometerFactory;
 
 public final class PotentiometerExtractor extends AbstractComponentExtractor<Potentiometer> {
-  public PotentiometerExtractor() {
-    super("^(.*\\w)\\s+([A,B,C]\\d+[M,K])", ComponentType.POTENTIOMETER, new PotentiometerFactory());
-  }
+    public PotentiometerExtractor() {
+        super("^(.*\\w)\\s+([A,B,C]\\d+[M,K])", ComponentType.POTENTIOMETER, new PotentiometerFactory());
+    }
 }

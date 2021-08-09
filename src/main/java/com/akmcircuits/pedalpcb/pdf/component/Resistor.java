@@ -4,14 +4,14 @@ package com.akmcircuits.pedalpcb.pdf.component;
  * Model representation of a resistor.
  */
 public final class Resistor extends AbstractComponent {
-  public static final ComponentType TYPE = ComponentType.RESISTOR;
+    public static final ComponentType TYPE = ComponentType.RESISTOR;
 
-  public Resistor(String name, String value) {
-    super(name, value);
-  }
+    public Resistor(String name, String value) {
+        super(name, value);
+    }
 
-  @Override
-  public ComponentType getType() {
-    return TYPE;
-  }
+    @Override
+    public ComponentType getType() {
+        return TYPE;
+    }
 }
