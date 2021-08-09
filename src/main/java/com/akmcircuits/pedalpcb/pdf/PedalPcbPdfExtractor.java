@@ -61,14 +61,21 @@ public final class PedalPcbPdfExtractor {
 
   public MultiPedalPcbPdf extractPcbs(List<String> filePaths) throws PedalPcbPdfException {
     List<PedalPcbPdf> pcbPdfs = new ArrayList<>(filePaths.size());
+    List<String> successFiles = new ArrayList<>();
+    List<String> errorFiles = new ArrayList<>();
 
     for (String filePath : filePaths) {
       try {
         pcbPdfs.add(extractPcb(filePath));
+        successFiles.add(filePath);
       } catch (Exception e) {
         LOGGER.warn("error parsing document: {}", e.getMessage());
+        errorFiles.add(filePath);
       }
     }
+
+    LOGGER.info("successfully parsed {} documents: {}", successFiles.size(), successFiles);
+    LOGGER.info("failed to parse {} documents: {}", errorFiles.size(), errorFiles);
 
     return new MultiPedalPcbPdf(pcbPdfs);
   }
