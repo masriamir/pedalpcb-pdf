@@ -28,7 +28,7 @@ public final class PedalPcbPdfExtractor {
   /**
    * Regex string to extract build document revision.
    */
-  private static final String REGEX_REVISION_BASE = "Revision\\s+.*";
+  private static final String REGEX_REVISION_BASE = "(?:Revision.*) (.*)";
 
   private static final StringExtractor EXTRACTOR_NAME = new StringExtractor(REGEX_NAME_BASE,
       Pattern.MULTILINE);
@@ -51,7 +51,7 @@ public final class PedalPcbPdfExtractor {
     }
 
     String name = names.get(2);
-    String revision = revisions.get(0).split(" ")[1];
+    String revision = revisions.get(1);
     LOGGER.info("found {}, Revision {}", name, revision);
 
     Components components = COMPONENTS_FACTORY.create(documentText);
