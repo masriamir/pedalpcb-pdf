@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public final class Components {
-  private Map<ComponentType, List<? extends Component>> componentTypeMap;
+  private final Map<ComponentType, List<? extends Component>> componentTypeMap;
 
   public Components() {
     componentTypeMap = new HashMap<>(ComponentType.values().length);
